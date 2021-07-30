@@ -1,88 +1,52 @@
 const noteModel = require('../models/note.model.js');
 
 class NoteService {
-    createNote = (note) => {
-        return new Promise(function (resolve, reject) {
-            try {
-                noteModel.createNote(note).then(note => {
-                        resolve(note);
-                    })
-                    .catch(err => {
-                        let message = err.message || "Error while creating the new note";
-                        reject(message);
-                    });
-            } catch (err) {
-                let message = err.message || "Error while creating the new note";
-                reject(message);
+    createNote = (note, callback) => {
+        noteModel.createNote(note, (err, doc) => {
+            if (err) {
+                callback(err, null);
+            } else {
+                callback(null, doc);
             }
         });
     }
 
-    findAllNotes = () => {
-        return new Promise(function (resolve, reject) {
-            try {
-                noteModel.findAllNotes().then(notes => {
-                        resolve(notes);
-                    })
-                    .catch(err => {
-                        let message = err.message || "Error occurred while retrieving all notes";
-                        reject(message);
-                    });
-
-            } catch (err) {
-                let message = err.message || "Error occurred while retrieving all notes";
-                reject(message);
+    findAllNotes = (callback) => {
+        noteModel.findAllNotes((err, doc) => {
+            if (err) {
+                callback(err, null);
+            } else {
+                callback(null, doc);
             }
         });
     }
 
-    findNoteById = (noteId) => {
-        return new Promise(function (resolve, reject) {
-            try {
-                noteModel.findNoteById(noteId).then(note => {
-                        resolve(note);
-                    })
-                    .catch(err => {
-                        let message = err.message || "Error occurred while finding a note by id";
-                        reject(message);
-                    });
-            } catch (err) {
-                let message = err.message || "Error occurred while finding a note by id";
-                reject(message);
+    findNoteById = (noteId, callback) => {
+        noteModel.findNoteById(noteId, (err, doc) => {
+            if (err) {
+                callback(err, null);
+            } else {
+                callback(null, doc);
             }
         });
     }
 
-    updateNoteById = (noteId, note) => {
-        return new Promise(function (resolve, reject) {
-            try {
-                noteModel.updateNoteById(noteId, note).then(note => {
-                        resolve(note);
-                    })
-                    .catch(err => {
-                        let message = err.message || "Error occurred while updating the note by id";
-                        reject(message);
-                    });
-            } catch (err) {
-                let message = err.message || "Error occurred while updating the note by id";
-                reject(message);
+    updateNoteById = (noteId, note, callback) => {
+        noteModel.updateNoteById(noteId, note, (err, doc) => {
+            if (err) {
+                callback(err, null);
+            } else {
+                callback(null, doc);
             }
         });
     }
 
-    deleteNoteById = (noteId) => {
-        return new Promise(function (resolve, reject) {
-            try {
-                noteModel.deleteNoteById(noteId).then(msg => {
-                        resolve(msg);
-                    })
-                    .catch(err => {
-                        let message = err.message || "Error occurred while deleting the note by id";
-                        reject(message);
-                    });
-            } catch (err) {
-                let message = err.message || "Error occurred while deleting the note by id";
-                reject(message);
+    deleteNoteById = (noteId, callback) => {
+        noteModel.deleteNoteById(noteId, (err, doc) => {
+            if (err) {
+                callback(err, null);
+            } else {
+                callback(null, doc);
             }
         });
     }
